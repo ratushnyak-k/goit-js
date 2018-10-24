@@ -1,0 +1,6 @@
+.history/
+.idea/
+.vscode/
+coverage/
+build/
+node_modules/
