@@ -1,8 +1,7 @@
 {
-  "name": "module-1",
+  "name": "school-goit",
   "version": "1.0.0",
   "description": "",
-  "main": "data-types.js",
   "dependencies": {},
   "devDependencies": {
     "prettier": "^1.14.3"
