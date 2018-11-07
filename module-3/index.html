@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fake chat</title>
+
+  <link rel="stylesheet" href="node_modules/normalize.css/normalize.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div class="main-container">
+  <div class="controls">
+    <div class="buttons">
+      <button class="btn btn-login" onclick="loginAs()">Login as</button>
+      <button class="btn btn-message" id="message" disabled onclick="writeMessage()">
+        Write a message
+      </button>
+    </div>
+    <div class="user-name" id="user-name"></div>
+  </div>
+
+  <div id="chat-container" class="chat-container">
+    <div class="message-container">
+      <div class="message">Hi everyone!</div>
+    </div>
+  </div>
+</div>
+<script src="index.js"></script>
+</body>
+</html>
