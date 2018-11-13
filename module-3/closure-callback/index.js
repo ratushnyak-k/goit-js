@@ -8,9 +8,9 @@ const userAge = () => {
   return user.age;
 };
 
+/* Callback */
 const arr = ['john', 'David', 'BRAD'];
-
-const arr1 = [{ name: 'john' }, { name: 'David' }, { name: 'BRAD' }];
+const arr1 = ['BiLL', 'DEn', 'Cris'];
 
 function map(array, handler) {
   let newArr = [];
@@ -20,9 +20,20 @@ function map(array, handler) {
   return newArr;
 }
 
-map(arr, function(item) {
+const capitalize = function(item) {
   return item.charAt(0).toUpperCase() + item.slice(1).toLowerCase();
-});
+};
+
+const antiCapitalize = function(item) {
+  return item.charAt(0).toLowerCase() + item.slice(1).toUpperCase();
+};
+
+map(arr, capitalize);
+map(arr1, capitalize);
+map(arr, antiCapitalize);
+map(arr1, antiCapitalize);
+
+/* */
 
 const a = 1;
 
