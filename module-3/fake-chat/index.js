@@ -17,10 +17,10 @@ function generateTemplate(message) {
   const div = document.createElement('div');
   div.setAttribute('class', 'message-container');
   div.innerHTML = `<div class="message" style="border-color: ${color};">
-                        <div>${message}</div>
-                        <div class="message-user-name">${userName}</div>
-                        <div class="date">${new Date().toLocaleString()}</div>
-                     </div>`;
+                      <div>${message}</div>
+                      <div class="message-user-name">${userName}</div>
+                      <div class="date">${new Date().toLocaleString()}</div>
+                   </div>`;
   return div;
 }
 
