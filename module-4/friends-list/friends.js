@@ -1,14 +1,23 @@
 'use strict';
-function User({ name, id, email, address, isFriend }) {
+function User({ name, id, email, address, isFriend, picture }) {
   this.name = name;
   this.id = id;
   this.email = email;
   this.address = address;
   this.isFriend = isFriend;
+  this.avatar = picture.large;
+
+  this.getFullName = function() {
+    return `${this.name.first} ${this.name.last}`;
+  };
+
+  this.getFullAddress = function() {
+    return `${this.address.city}, ${this.address.street}`;
+  };
 
   this.createDOMElement = function() {
     const div = document.createElement('div');
-    div.setAttribute('class', 'friend');
+    div.setAttribute('class', 'user');
     div.setAttribute('id', this.id);
     div.innerHTML = this.getTemplate();
     return div;
@@ -20,12 +29,17 @@ function User({ name, id, email, address, isFriend }) {
 
   this.getTemplate = function() {
     return `
-      <div>${this.name}</div>
-      <div>${this.email}</div>
-      <div>${this.address.street}</div>
-      <div>
-        <button>${this.isFriend ? 'Remove' : 'Add'}</button>
+      <div class="space-between">
+        <div class="button-wrap">
+          <button>${this.isFriend ? 'Remove' : 'Add'}</button>
+        </div>
+        <div class="img-wrap"> 
+          <img src="${this.avatar}" alt="${this.getFullName()}">
+        </div>      
       </div>
+      <strong class="right">${this.getFullName()}</strong>
+      <dl class="flex-end"><dt>Email: </dt><dd>${this.email}</dd></dl>
+      <dl class="flex-end"><dt>Address: </dt><dd>${this.getFullAddress()}</dd></dl>
     `;
   };
 

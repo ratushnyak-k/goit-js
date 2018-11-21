@@ -1,0 +1,54 @@
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: 'Roboto', sans-serif;
+}
+
+.user {
+  width: calc(50% - 40px);
+  padding: 20px;
+}
+
+.center {
+  text-align: center;
+  display: block;
+}
+
+.right {
+  text-align: right;
+  display: block;
+}
+.space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-wrap,
+.img-wrap {
+  flex: 1 0 auto;
+}
+
+.img-wrap img {
+  width: 100%;
+}
+
+button {
+  border: 1px solid;
+  outline: none;
+  width: 50%;
+  margin-left: auto;
+  display: block;
+  margin-right: 20px;
+}
+
+dt {
+  font-weight: bold;
+}
+dd {
+  margin-left: 10px;
+}
