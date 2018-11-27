@@ -1,18 +1,19 @@
-'use strict';
-function User({ name, id, email, address, isFriend, picture }) {
-  this.name = name;
+function User({ id, name, address, email, picture, isFriend }) {
   this.id = id;
-  this.email = email;
+  this.name = name;
   this.address = address;
-  this.isFriend = isFriend;
+  this.email = email;
   this.avatar = picture.large;
+  this.isFriend = isFriend;
 
   this.getFullName = function() {
-    return `${this.name.first} ${this.name.last}`;
+    const { first, last } = this.name;
+    return `${first} ${last}`;
   };
 
   this.getFullAddress = function() {
-    return `${this.address.city}, ${this.address.street}`;
+    const { city, street } = this.address;
+    return `${city}, ${street}`;
   };
 
   this.createDOMElement = function() {
@@ -23,24 +24,26 @@ function User({ name, id, email, address, isFriend, picture }) {
     return div;
   };
 
-  this.reRenderElement = function() {
-    document.getElementById(this.id).innerHTML = this.getTemplate();
-  };
-
   this.getTemplate = function() {
     return `
       <div class="space-between">
-        <div class="button-wrap">
+        <div>
           <button>${this.isFriend ? 'Remove' : 'Add'}</button>
         </div>
-        <div class="img-wrap"> 
+        <div>
           <img src="${this.avatar}" alt="${this.getFullName()}">
-        </div>      
+        </div>
       </div>
       <strong class="right">${this.getFullName()}</strong>
-      <dl class="flex-end"><dt>Email: </dt><dd>${this.email}</dd></dl>
-      <dl class="flex-end"><dt>Address: </dt><dd>${this.getFullAddress()}</dd></dl>
-    `;
+      <dl class="space-between">
+        <dt>Email: </dt>
+        <dd>${this.email}</dd>
+      </dl>
+      <dl class="space-between">
+        <dt>Address: </dt>
+        <dd>${this.getFullAddress()}</dd>
+      </dl>
+`;
   };
 
   this.setAsFriend = function() {
@@ -52,17 +55,18 @@ function User({ name, id, email, address, isFriend, picture }) {
   };
 }
 
-function UserList(list) {
-  this.fullUserList = list.map((item) => new User(item));
+function UserList(data) {
+  const self = this;
+  this.fullUserList = data.map((item) => {
+    return new User(item);
+  });
 
-  this.renderList = function(list) {
-    const div = document.createElement('div');
-    div.setAttribute('class', 'user-list');
-    list.forEach((user) => {
-      div.appendChild(user.createDOMElement());
-    });
-    document.body.appendChild(div);
-  };
+  this.friendList = this.fullUserList.filter(function(item) {
+    console.log(self);
+    return item.isFriend;
+  });
+
+  this.notFriendList = this.fullUserList.filter((item) => !item.isFriend);
 
   this.clearList = function() {
     const userListDOMNode = document.querySelector('.user-list');
@@ -71,34 +75,46 @@ function UserList(list) {
     }
   };
 
-  this.showFullUserList = function() {
+  this.renderList = function(list) {
     this.clearList();
-    this.renderList(this.fullUserList);
-  };
 
-  this.showFriendsList = function() {
-    this.clearList();
-    this.renderList(this.fullUserList.filter((user) => user.isFriend));
-  };
+    const div = document.createElement('div');
+    div.setAttribute('class', 'user-list');
 
-  this.showNotFriendsList = function() {
-    this.clearList();
-    this.renderList(this.fullUserList.filter((user) => !user.isFriend));
+    list.forEach((user) => {
+      div.appendChild(user.createDOMElement());
+    });
+
+    document.body.appendChild(div);
   };
 
   this.addFriend = function(id) {
-    const user = this.fullUserList.find((user) => user.id === id);
+    const user = this.fullUserList.find((item) => {
+      return item.id === id;
+    });
     user.setAsFriend();
-    user.reRenderElement();
+    this.renderList(this.fullUserList);
   };
 
   this.removeFriend = function(id) {
-    const user = this.fullUserList.find((user) => user.id === id);
+    const user = this.fullUserList.find((item) => {
+      return item.id === id;
+    });
     user.setAsNotFriend();
-    user.reRenderElement();
+    this.renderList(this.fullUserList);
   };
 }
 
-const userList = new UserList(dataBase);
+const list = new UserList(dataBase);
 
-userList.showFullUserList();
+function showAllUsers() {
+  list.renderList(list.fullUserList);
+}
+
+function showFriends() {
+  list.renderList(list.friendList);
+}
+
+function showNotFriends() {
+  list.renderList(list.notFriendList);
+}
