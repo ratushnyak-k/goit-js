@@ -56,15 +56,11 @@ function User({ id, name, address, email, picture, isFriend }) {
 }
 
 function UserList(data) {
-  const self = this;
   this.fullUserList = data.map((item) => {
     return new User(item);
   });
 
-  this.friendList = this.fullUserList.filter(function(item) {
-    console.log(self);
-    return item.isFriend;
-  });
+  this.friendList = this.fullUserList.filter((item) => item.isFriend);
 
   this.notFriendList = this.fullUserList.filter((item) => !item.isFriend);
 
