@@ -27,3 +27,5 @@ function Fridge(power) {
 
 Fridge.prototype = Object.create(Fridge.prototype);
 Fridge.prototype.constructor = Fridge;
+
+const fridge = new Fridge(1000);
