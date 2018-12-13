@@ -16,7 +16,7 @@
 * create new models (classes) `Product` and `ProductList`
 * extend **existed** user models with new abilities that can manage `Products`
 
-####_Additional task_
+#### _Additional task_
 
 * add `ShoppingCard` model that can manage products for sell
 * all users can add and remove products from shopping cart
