@@ -4,7 +4,7 @@
 
 ### Requirements
 
-* current app should have product list (product data-base you can find in `./data-base.js` file as `products` variable)
+* current app should have product's list (product data-base you can find in `./data-base.js` file as `products` variable)
 * **all** users should have an ability to read product list
 * **Moderators** should have an ability to create Products
 * only **Admin** users should have abilities to create and remove Products from ProductsList
