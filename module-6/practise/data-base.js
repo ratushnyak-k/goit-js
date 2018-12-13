@@ -731,3 +731,5 @@ const products = [
     DimUnit: 'cm',
   },
 ];
+
+// https://github.com/SAP/openui5/blob/master/src/sap.ui.demokit/test/sap/ui/demokit/explored/products.json
