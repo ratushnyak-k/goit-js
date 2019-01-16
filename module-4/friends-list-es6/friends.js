@@ -19,7 +19,7 @@ class User {
   }
 
   createDOMElement() {
-    const div = document.createElement('div');
+    const div = document.createElement('root');
     div.setAttribute('class', 'user');
     div.setAttribute('id', this.id);
     div.innerHTML = this.getTemplate();
@@ -78,7 +78,7 @@ class UserList {
   renderList(list) {
     this.clearList();
 
-    const div = document.createElement('div');
+    const div = document.createElement('root');
     div.setAttribute('class', 'user-list');
 
     list.forEach((user) => {

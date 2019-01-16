@@ -1,5 +1,5 @@
 const mappedHtml = dataBase.map((item) => {
-  const div = document.createElement('div');
+  const div = document.createElement('root');
   div.innerHTML = `
     <div class="full-name">${item.name}</div>
     <div class="nick-name">${item.username}</div>

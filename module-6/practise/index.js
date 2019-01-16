@@ -1,6 +1,39 @@
+// check instances
+// Product, ProductList
+// extend users to manage products
+// ShoppingCart
+
+// create rootNode for list
+// create node for each user, product
+// create template for each user, product
+// render lists
+// show lists one by one
+// appendChild vs insertAdjustmentHTML, fragment
+// make refactoring
+
 class User {
   constructor(data) {
     this.updateData(data);
+    this.node = document.createElement('li');
+    this.node.setAttribute('class', 'user-item');
+  }
+
+  renderUser() {
+    this.node.innerHTML = this.template;
+  }
+
+  get fullName() {
+    const { title, first, last } = this.name;
+    return `${title} ${first} ${last}`;
+  }
+
+  get template() {
+    return `
+    <div>
+      ${this.fullName}<br>
+      ${this.email}<br>
+      ${this.dob.age}<br>
+    </div>`;
   }
 
   updateData(data) {
@@ -9,7 +42,6 @@ class User {
     this.id = data.id;
     this.dob = data.dob;
   }
-
 }
 
 class Moderator extends User {
@@ -19,15 +51,31 @@ class Moderator extends User {
   }
 
   createUser(list, UserRole, userData) {
-    list.add(new UserRole(userData));
+    if (list instanceof UserList) {
+      list.add(new UserRole(userData));
+    } else {
+      console.error(list, 'was not create with UserList');
+    }
   }
 
   updateUser(list, userId, newUserData) {
-    const user = list.find((item) => item.id === userId);
-    if (user) {
-      user.updateData(newUserData);
+    if (list instanceof UserList) {
+      const user = list.find((item) => item.id === userId);
+      if (user) {
+        user.updateData(newUserData);
+      } else {
+        console.error('User not found');
+      }
     } else {
-      console.error('User not found');
+      console.error(list, 'was not create with UserList');
+    }
+  }
+
+  createProduct(list, productData) {
+    if (list instanceof ProductsList) {
+      list.add(new Product(productData));
+    } else {
+      console.error(list, 'was not create with ProductList');
     }
   }
 }
@@ -40,6 +88,10 @@ class Admin extends Moderator {
 
   removeUser(list, userId) {
     list.remove(userId);
+  }
+
+  removeProduct(list, productId) {
+    list.remove(productId);
   }
 
   changeRole(list, userId, UserRole) {
@@ -58,24 +110,57 @@ class Guest extends User {
   }
 }
 
-let admin = new Admin(dataBase[0]);
+let admin = new Admin(users[0]);
 
-class UserList {
+class List {
   constructor(data = []) {
     this.list = data;
   }
 
-  add(user) {
-    this.list.push(user);
+  add(item) {
+    this.list.push(item);
   }
 
-  remove(userId) {
-    this.list.forEach((user, i) => {
-      if (user.id === userId) {
+  remove(id) {
+    this.list.forEach((item, i) => {
+      if (item.id === id) {
         this.list.splice(i, 1);
       }
     });
   }
 }
 
+class UserList extends List {
+  constructor(data) {
+    super(data);
+    this.rootNode = document.querySelector('#users');
+  }
+
+  attachRootNodeTo(node) {
+    this.rootNode.appendChild(node);
+  }
+}
+class ProductsList extends List {
+  constructor(data) {
+    super(data);
+    this.rootNode = document.querySelector('#products');
+    this.listNode = document.createElement('ul');
+  }
+}
 const userList = new UserList([admin]);
+
+admin.createUser(userList, Moderator, users[2]);
+const productsList = new ProductsList();
+
+class Product {
+  constructor(data) {
+    this.id = data.ProductId;
+    this.category = data.Category;
+    this.description = data.Description;
+    this.name = data.Name;
+    this.status = data.Status;
+    this.quantity = data.Quantity;
+  }
+}
+
+const ul = document.createElement('ul');

@@ -17,7 +17,7 @@ function User({ id, name, address, email, picture, isFriend }) {
   };
 
   this.createDOMElement = function() {
-    const div = document.createElement('div');
+    const div = document.createElement('root');
     div.setAttribute('class', 'user');
     div.setAttribute('id', this.id);
     div.innerHTML = this.getTemplate();
@@ -74,7 +74,7 @@ function UserList(data) {
   this.renderList = function(list) {
     this.clearList();
 
-    const div = document.createElement('div');
+    const div = document.createElement('root');
     div.setAttribute('class', 'user-list');
 
     list.forEach((user) => {

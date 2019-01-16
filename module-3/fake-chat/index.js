@@ -14,7 +14,7 @@ function loginAs() {
 }
 
 function generateTemplate(message) {
-  const div = document.createElement('div');
+  const div = document.createElement('root');
   div.setAttribute('class', 'message-container');
   div.innerHTML = `<div class="message" style="border-color: ${color};">
                       <div>${message}</div>
