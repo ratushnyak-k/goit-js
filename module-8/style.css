@@ -1,0 +1,28 @@
+#parent,
+#child,
+#inner-child {
+  margin: 1rem;
+  padding: 16px;
+  outline: 1px solid #ffc107;
+  color: #fff;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+#parent {
+  background-color: #673ab7;
+}
+
+#child {
+  background-color: #448aff;
+}
+
+#inner-child {
+  background-color: #009688;
+}
+
+#scrollable {
+  height: 2000px;
+  width: 2000px;
+  background: green;
+}
