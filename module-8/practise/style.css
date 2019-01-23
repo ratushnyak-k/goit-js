@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+li {
+  width: 200px;
+  height: 200px;
+  list-style: none;
+  border: 1px solid;
+}
+
+.palette {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.cell {
+  width: 200px;
+  height: 200px;
+  border: 1px solid;
+}
