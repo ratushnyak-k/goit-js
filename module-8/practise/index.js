@@ -57,13 +57,14 @@ colors.appendChild(UL);
 
 palette.addEventListener('drop', function(e) {
   if (e.target.classList.contains('cell')) {
-    const currentColor = e.target.getAttribute('data-color') || '0,0,0,0';
+    const currentColor = e.target.getAttribute('data-color') || '255,255,255,1';
     const newColor = e.dataTransfer.getData('color');
     const currentColorArray = colorStringToArray(currentColor);
     const newColorArray = colorStringToArray(newColor);
     const blendedColor = colorBlend(currentColorArray, newColorArray);
 
     e.target.setAttribute('data-color', blendedColor);
+    console.log(blendedColor);
     e.target.style['background-color'] = `rgba(${blendedColor})`;
   }
 });
@@ -88,7 +89,7 @@ function colorStringToArray(colorString) {
 
 function colorBlend(currentColor, newColor) {
   return currentColor.map((item, i) => {
-    return (item + newColor[i]) / 2;
+    return Math.ceil((Number(item) + Number(newColor[i])) / 2);
   });
 }
 
