@@ -2,7 +2,9 @@
   "name": "school-goit",
   "version": "1.0.0",
   "description": "",
-  "dependencies": {},
+  "dependencies": {
+    "lodash": "^4.17.11"
+  },
   "devDependencies": {
     "prettier": "^1.14.3"
   },
