@@ -1,0 +1,82 @@
+<html>
+  <head></head>
+  <body>
+    <style>
+      .done {
+        color: gray;
+        text-decoration: line-through;
+      }
+    </style>
+    <div id="app">
+      <h2>{{fullName}}</h2>
+
+      <input type="radio" id="one" value="done" v-model="isShownDone" />
+      <label for="one">Done</label>
+      <br />
+      <input type="radio" id="two" value="undone" v-model="isShownDone" />
+      <label for="two">Undone</label>
+      <todo-list :list="filteredList" :toggle="toggle"></todo-list>
+
+      <form @submit.prevent="addNewTodo">
+        <input type="text" v-model="newTodo" />
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      Vue.component('todo-list', {
+        template: `
+        <ul>
+          <li
+          v-for="item in list"
+          :class="{'done': item.done}">
+            <span>{{item.title}}</span>
+            <button @click="toggle(item)">Toggle todo</button>
+          </li>
+        </ul>`,
+        props: ['list', 'toggle'],
+      });
+
+      const instance = new Vue({
+        el: '#app',
+        data: {
+          title: 'TODOs:',
+          list: [{ title: 'learn JS', done: true }, { title: 'learn VUE', done: false }],
+          firstName: 'nick',
+          lastName: 'doe',
+          newTodo: '',
+          isShownDone: 'undone',
+        },
+        methods: {
+          toggle(item) {
+            item.done = !item.done;
+          },
+          addNewTodo() {
+            if (this.newTodo) {
+              this.list.push({ title: this.newTodo, done: false });
+              this.newTodo = '';
+            }
+          },
+        },
+        computed: {
+          fullName() {
+            return this.firstName + ' ' + this.lastName;
+          },
+          capitalizedFullName() {
+            return this.fullName;
+          },
+          doneList() {
+            return this.list.filter((item) => item.done);
+          },
+          unDoneList() {
+            return this.list.filter((item) => !item.done);
+          },
+          filteredList() {
+            return this.isShownDone === 'undone' ? this.unDoneList : this.doneList;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
