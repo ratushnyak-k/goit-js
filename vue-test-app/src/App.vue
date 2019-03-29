@@ -9,7 +9,7 @@
       <router-link to="/chats/123123">/chats/123123</router-link>
     </div>
 
-    <router-view />
+    <router-view></router-view>
   </div>
 </template>
 
